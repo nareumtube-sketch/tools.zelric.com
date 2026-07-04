@@ -1,0 +1,14 @@
+# tools.zelric.com — 독립 Cloudflare 워커
+# worker-v2.js(blog-zelric-com)에서 tools 코드만 추출·분리한 단독 워커.
+# D1/R2 없음(설정 인라인). 이미지 처리는 전부 클라이언트에서 수행.
+
+name = "tools-zelric-com"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# ✅ 2026-07-04 대시보드에서 tools.zelric.com 커스텀 도메인을 이 워커에 부착 완료.
+#    config를 실제 상태와 일치시켜, 이후 wrangler deploy가 이 도메인을 제거하지 않게 함.
+routes = [
+  { pattern = "tools.zelric.com", custom_domain = true }
+]

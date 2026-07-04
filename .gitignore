@@ -1,0 +1,8 @@
+# Cloudflare
+.wrangler/
+# Node
+node_modules/
+# OS/에디터
+.DS_Store
+Thumbs.db
+*.log
