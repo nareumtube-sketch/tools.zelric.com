@@ -537,7 +537,8 @@ function renderToolsHome(origin, settings) {
   const tiles = Array.from({ length: 30 }).map((_, i) => `<span class="pt" style="background:${PALETTE[i % PALETTE.length]}"></span>`).join("");
   const card = (t) => {
     const ai = (t.slug === "remove-bg" || t.slug === "upscale") ? ' data-ai="1"' : '';
-    const thumb = `<div class="shot-thumb"><span class="ti">${toolSvg(t.icon, 44)}</span>${t.ready ? "" : '<span class="badge-soon">준비 중</span>'}</div>`;
+    const c = col(t);
+    const thumb = `<div class="shot-thumb" style="background:color-mix(in srgb, ${c} 13%, var(--bg))"><span class="ti" style="color:${c}">${toolSvg(t.icon, 44)}</span>${t.ready ? "" : '<span class="badge-soon">준비 중</span>'}</div>`;
     const foot = `<div class="shot-foot"><div><p class="shot-name">${escapeHtml(t.name)}</p><p class="shot-sub">${escapeHtml(t.tagline)}</p></div><span class="shot-tag">${t.ready ? "무료" : "준비"}</span></div>`;
     if (!t.ready) return `<div class="shot soon" data-cat="${escapeHtml(t.cat)}"${ai}>${thumb}${foot}</div>`;
     return `<a class="shot" href="/${t.slug}" data-cat="${escapeHtml(t.cat)}"${ai}>${thumb}${foot}</a>`;
