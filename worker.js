@@ -401,13 +401,17 @@ const TOOLS_CSS = `
 .btn-red.wide{width:100%;margin-top:4px}
 .btn-gray{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font:inherit;font-size:.96rem;font-weight:700;color:var(--text);background:var(--bg-surface);text-decoration:none;transition:background .15s}
 .btn-gray:hover{background:var(--border)}
-.phero-art{position:relative;height:360px}
-.phero-art .cg{position:absolute;border-radius:18px;box-shadow:0 16px 32px -16px rgba(13,12,34,.32)}
-.cg1{width:150px;height:200px;left:34%;top:0;background:linear-gradient(135deg,#ff9a9e,#fecfef);z-index:3}
-.cg2{width:120px;height:120px;left:4%;top:60px;background:linear-gradient(135deg,#a1c4fd,#c2e9fb)}
-.cg3{width:130px;height:160px;left:62%;top:34px;background:linear-gradient(135deg,#84fab0,#8fd3f4)}
-.cg4{width:120px;height:150px;left:16%;top:184px;background:linear-gradient(135deg,#fbc2eb,#a6c1ee)}
-.cg5{width:140px;height:128px;left:52%;top:214px;background:linear-gradient(135deg,#fda085,#f6d365)}
+.phero-art{position:relative;height:360px;display:flex;align-items:center;justify-content:center}
+.fan{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.fan-card{position:absolute;top:50%;left:50%;width:150px;height:200px;margin:-100px 0 0 -75px;border-radius:16px;overflow:hidden;box-shadow:0 18px 36px -16px rgba(13,12,34,.34);transform-origin:center bottom;will-change:transform;background-size:cover;background-position:center}
+.fan-card:nth-child(1){transform:translate(-96px,40px) rotate(-21deg) scale(.78);z-index:1}
+.fan-card:nth-child(2){transform:translate(-70px,22px) rotate(-14deg) scale(.85);z-index:2}
+.fan-card:nth-child(3){transform:translate(-36px,8px) rotate(-7deg) scale(.93);z-index:3}
+.fan-card:nth-child(4){transform:translate(0,0) rotate(0deg) scale(1);z-index:10}
+.fan-card:nth-child(5){transform:translate(36px,8px) rotate(7deg) scale(.93);z-index:3}
+.fan-card:nth-child(6){transform:translate(70px,22px) rotate(14deg) scale(.85);z-index:2}
+.fan-card:nth-child(7){transform:translate(96px,40px) rotate(21deg) scale(.78);z-index:1}
+@media (max-width:520px){.fan{transform:scale(.76)}}
 .band{background:var(--bg-surface);padding:56px 24px;text-align:center}
 .band-in{max-width:620px;margin:0 auto}
 .band-in h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin:0 0 12px;color:var(--text)}
@@ -558,9 +562,15 @@ ${renderToolsHeader()}
 <p class="phero-p">압축·리사이즈·자르기부터 AI 배경 제거까지. 설치도 회원가입도 없이 브라우저에서 바로.</p>
 <div class="phero-cta"><a class="btn-red" href="/compress">무료로 시작하기</a><a class="btn-gray" href="#features">도구 둘러보기</a></div>
 </div>
-<div class="phero-art" aria-hidden="true">
-<span class="cg cg1"></span><span class="cg cg2"></span><span class="cg cg3"></span><span class="cg cg4"></span><span class="cg cg5"></span>
-</div>
+<div class="phero-art" aria-hidden="true"><div class="fan">
+<div class="fan-card" style="background-image:linear-gradient(135deg,#a1c4fd,#c2e9fb)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#fbc2eb,#a6c1ee)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#84fab0,#8fd3f4)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#ff9a9e,#fecfef)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#fda085,#f6d365)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#d4fc79,#96e6a1)"></div>
+<div class="fan-card" style="background-image:linear-gradient(135deg,#ffecd2,#fcb69f)"></div>
+</div></div>
 </div>
 </section>
 ${grid}
@@ -572,6 +582,8 @@ ${feature(m3, "AI로 배경 제거·업스케일", "클릭 한 번으로 누끼�
 ${adBottom ? `<div class="tool-ad">${adBottom}</div>` : ""}
 ${renderToolsFooter()}
 <script>(function(){var ps=document.querySelectorAll('.fpill');var cs=document.querySelectorAll('.shot[data-cat]');function apply(c){for(var k=0;k<cs.length;k++){var s=cs[k];var show=c==='all'?true:(c==='ai'?s.getAttribute('data-ai')==='1':s.getAttribute('data-cat')===c);s.style.display=show?'':'none';}}for(var i=0;i<ps.length;i++){ps[i].addEventListener('click',function(){for(var j=0;j<ps.length;j++)ps[j].classList.remove('on');this.classList.add('on');apply(this.getAttribute('data-c'));});}})();</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>(function(){var fan=document.querySelector('.fan');if(!fan||!window.gsap)return;var cards=[].slice.call(fan.querySelectorAll('.fan-card'));var P=[{r:-21,s:.78,x:-96,y:40,z:1},{r:-14,s:.85,x:-70,y:22,z:2},{r:-7,s:.93,x:-36,y:8,z:3},{r:0,s:1,x:0,y:0,z:10},{r:7,s:.93,x:36,y:8,z:3},{r:14,s:.85,x:70,y:22,z:2},{r:21,s:.78,x:96,y:40,z:1}];function pos(i){return P[i]||P[P.length-1];}cards.forEach(function(c,idx){var p=pos(idx);gsap.set(c,{x:p.x,y:p.y,rotation:p.r,scale:p.s,opacity:1,zIndex:p.z});});var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!reduce){cards.forEach(function(c,idx){gsap.from(c,{y:120,scale:.5,opacity:0,duration:1.1,ease:'elastic.out(1.05,.78)',delay:.25+idx*.06,immediateRender:false});});}function layout(h){cards.forEach(function(c,i){var p=pos(i);var tx=p.x,ty=p.y,tr=p.r,ts=p.s;if(h!=null){var d=Math.abs(i-h);if(i===h){ty-=22;ts*=1.08;}else{var push=18*(1+.2*Math.max(0,3-d));if(i<h){tx-=push;tr-=3/(d+1);}else{tx+=push;tr+=3/(d+1);}}}gsap.to(c,{x:tx,y:ty,rotation:tr,scale:ts,duration:.5,ease:'elastic.out(1,.75)',overwrite:'auto'});});}cards.forEach(function(c,i){c.addEventListener('mouseenter',function(){layout(i);});});fan.addEventListener('mouseleave',function(){layout(null);});})();</script>
 </body></html>`;
 }
 
