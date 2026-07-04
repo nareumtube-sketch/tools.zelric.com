@@ -300,6 +300,12 @@ const TOOLS_CSS = `
 .shot-thumb .ti{color:var(--text-secondary);transition:color .16s}
 .shot:hover .shot-thumb{transform:translateY(-3px);border-color:var(--text-tertiary);box-shadow:0 10px 22px -14px rgba(13,12,34,.2)}
 .shot:hover .ti{color:var(--pink)}
+/* 포인터 추적 글로우 카드 */
+.gcard{--spread:180;--bd:2;--spot:170px;--bsz:calc(var(--bd)*1px);--hue:calc(var(--base,220) + (var(--xp,0)*var(--spread)));border:var(--bsz) solid transparent;background-color:var(--tint,var(--bg-surface));background-image:radial-gradient(var(--spot) var(--spot) at calc(var(--x,0)*1px) calc(var(--y,0)*1px),hsl(var(--hue) 85% 62% / .16),transparent 72%);background-attachment:fixed;background-size:calc(100% + 2*var(--bsz)) calc(100% + 2*var(--bsz));background-position:50% 50%;overflow:visible}
+.gcard::before,.gcard::after{content:"";pointer-events:none;position:absolute;inset:calc(var(--bsz)*-1);border:var(--bsz) solid transparent;border-radius:inherit;background-attachment:fixed;background-size:calc(100% + 2*var(--bsz)) calc(100% + 2*var(--bsz));background-repeat:no-repeat;background-position:50% 50%;-webkit-mask:linear-gradient(#0000,#0000),linear-gradient(#fff,#fff);-webkit-mask-clip:padding-box,border-box;-webkit-mask-composite:source-in;mask:linear-gradient(#0000,#0000),linear-gradient(#fff,#fff);mask-clip:padding-box,border-box;mask-composite:intersect}
+.gcard::before{background-image:radial-gradient(calc(var(--spot)*.8) calc(var(--spot)*.8) at calc(var(--x,0)*1px) calc(var(--y,0)*1px),hsl(var(--hue) 90% 58% / 1),transparent 100%);filter:brightness(1.5)}
+.gcard::after{background-image:radial-gradient(calc(var(--spot)*.5) calc(var(--spot)*.5) at calc(var(--x,0)*1px) calc(var(--y,0)*1px),hsl(0 0% 100% / .9),transparent 100%)}
+.shot:hover .shot-thumb.gcard{border-color:transparent}
 .shot-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 2px 0}
 .shot-name{font-size:.96rem;font-weight:700;color:var(--text);margin:0}
 .shot-sub{font-size:.8rem;color:var(--text-tertiary);margin:2px 0 0}
@@ -533,6 +539,13 @@ function renderToolsHome(origin, settings) {
   const adsHead = settings.adsense_code || "";
   const adBottom = sanitizeAdHtml(settings.ad_bottom_html || "");
   const col = (t) => (t.grad.match(/#[0-9a-f]{6}/i) || ["#e60023"])[0];
+  const hexToHue = (hex) => {
+    const m = hex.replace("#", "");
+    const r = parseInt(m.slice(0, 2), 16) / 255, g = parseInt(m.slice(2, 4), 16) / 255, b = parseInt(m.slice(4, 6), 16) / 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0;
+    if (d) { if (mx === r) h = ((g - b) / d) % 6; else if (mx === g) h = (b - r) / d + 2; else h = (r - g) / d + 4; h *= 60; if (h < 0) h += 360; }
+    return Math.round(h);
+  };
   const feature = (media, title, desc, btn, href, flip) => `<div class="fx${flip ? ' fx-flip' : ''}"><div class="fx-media">${media}</div><div class="fx-text"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(desc)}</p><a class="btn-red" href="${href}">${escapeHtml(btn)}</a></div></div>`;
   const m1 = `<div class="fx-card"><div class="fxc-row"><span class="fxc-lab">원본</span><span class="fxc-bar"></span><span class="fxc-sz">2.4MB</span></div><div class="fxc-row"><span class="fxc-lab">압축</span><span class="fxc-bar sm"></span><span class="fxc-sz red">670KB</span></div><span class="fxc-badge">−72% 절감</span></div>`;
   const m2 = `<div class="fx-card fx-grid">${TOOLS.slice(0, 6).map(t => `<span class="fxg" style="color:${col(t)}">${toolSvg(t.icon, 24)}</span>`).join("")}</div>`;
@@ -542,7 +555,7 @@ function renderToolsHome(origin, settings) {
   const card = (t) => {
     const ai = (t.slug === "remove-bg" || t.slug === "upscale") ? ' data-ai="1"' : '';
     const c = col(t);
-    const thumb = `<div class="shot-thumb" style="background:color-mix(in srgb, ${c} 13%, var(--bg))"><span class="ti" style="color:${c}">${toolSvg(t.icon, 44)}</span>${t.ready ? "" : '<span class="badge-soon">준비 중</span>'}</div>`;
+    const thumb = `<div class="shot-thumb gcard" data-glow style="--base:${hexToHue(c)};--tint:color-mix(in srgb, ${c} 12%, var(--bg))"><span class="ti" style="color:${c}">${toolSvg(t.icon, 44)}</span>${t.ready ? "" : '<span class="badge-soon">준비 중</span>'}</div>`;
     const foot = `<div class="shot-foot"><div><p class="shot-name">${escapeHtml(t.name)}</p><p class="shot-sub">${escapeHtml(t.tagline)}</p></div><span class="shot-tag">${t.ready ? "무료" : "준비"}</span></div>`;
     if (!t.ready) return `<div class="shot soon" data-cat="${escapeHtml(t.cat)}"${ai}>${thumb}${foot}</div>`;
     return `<a class="shot" href="/${t.slug}" data-cat="${escapeHtml(t.cat)}"${ai}>${thumb}${foot}</a>`;
@@ -582,6 +595,7 @@ ${feature(m3, "AI로 배경 제거·업스케일", "클릭 한 번으로 누끼�
 ${adBottom ? `<div class="tool-ad">${adBottom}</div>` : ""}
 ${renderToolsFooter()}
 <script>(function(){var ps=document.querySelectorAll('.fpill');var cs=document.querySelectorAll('.shot[data-cat]');function apply(c){for(var k=0;k<cs.length;k++){var s=cs[k];var show=c==='all'?true:(c==='ai'?s.getAttribute('data-ai')==='1':s.getAttribute('data-cat')===c);s.style.display=show?'':'none';}}for(var i=0;i<ps.length;i++){ps[i].addEventListener('click',function(){for(var j=0;j<ps.length;j++)ps[j].classList.remove('on');this.classList.add('on');apply(this.getAttribute('data-c'));});}})();</script>
+<script>(function(){var px=0,py=0,t=false,r=document.documentElement.style;function up(){r.setProperty('--x',px.toFixed(1));r.setProperty('--xp',(px/window.innerWidth).toFixed(3));r.setProperty('--y',py.toFixed(1));r.setProperty('--yp',(py/window.innerHeight).toFixed(3));t=false;}window.addEventListener('pointermove',function(e){px=e.clientX;py=e.clientY;if(!t){t=true;requestAnimationFrame(up);}},{passive:true});})();</script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script>(function(){var fan=document.querySelector('.fan');if(!fan||!window.gsap)return;var cards=[].slice.call(fan.querySelectorAll('.fan-card'));var P=[{r:-21,s:.78,x:-96,y:40,z:1},{r:-14,s:.85,x:-70,y:22,z:2},{r:-7,s:.93,x:-36,y:8,z:3},{r:0,s:1,x:0,y:0,z:10},{r:7,s:.93,x:36,y:8,z:3},{r:14,s:.85,x:70,y:22,z:2},{r:21,s:.78,x:96,y:40,z:1}];function pos(i){return P[i]||P[P.length-1];}cards.forEach(function(c,idx){var p=pos(idx);gsap.set(c,{x:p.x,y:p.y,rotation:p.r,scale:p.s,opacity:1,zIndex:p.z});});var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!reduce){cards.forEach(function(c,idx){gsap.from(c,{y:120,scale:.5,opacity:0,duration:1.1,ease:'elastic.out(1.05,.78)',delay:.25+idx*.06,immediateRender:false});});}function layout(h){cards.forEach(function(c,i){var p=pos(i);var tx=p.x,ty=p.y,tr=p.r,ts=p.s;if(h!=null){var d=Math.abs(i-h);if(i===h){ty-=22;ts*=1.08;}else{var push=18*(1+.2*Math.max(0,3-d));if(i<h){tx-=push;tr-=3/(d+1);}else{tx+=push;tr+=3/(d+1);}}}gsap.to(c,{x:tx,y:ty,rotation:tr,scale:ts,duration:.5,ease:'elastic.out(1,.75)',overwrite:'auto'});});}cards.forEach(function(c,i){c.addEventListener('mouseenter',function(){layout(i);});});fan.addEventListener('mouseleave',function(){layout(null);});})();</script>
 </body></html>`;
