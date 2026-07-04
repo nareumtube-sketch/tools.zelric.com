@@ -3,6 +3,10 @@
 `worker-v2.js`(blog+tools 통합)에서 **tools 코드만 추출**한 단독 Cloudflare 워커입니다.
 blog와 완전 분리 — D1/R2 없음, 설정 인라인, 이미지 처리는 전부 브라우저에서 수행.
 
+## 배포
+GitHub `nareumtube-sketch/tools.zelric.com`(main)에 push하면 Cloudflare Workers Build가
+자동으로 `npx wrangler deploy` 실행 → `tools-zelric-com` 워커에 배포. (blog·zelric와 동일 방식)
+
 ## 구성
 - `worker.js` — 추출·조립된 워커 (도구 8종 + 홈 + 정책/소개/문의 + robots/sitemap)
 - `wrangler.toml` — 워커 이름 `tools-zelric-com`, 커스텀 도메인은 **검증 후** 부착
