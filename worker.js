@@ -553,7 +553,7 @@ ${renderToolsHeader()}
 <section class="phero">
 <div class="phero-in">
 <div class="phero-copy">
-<h1 class="phero-h1">이미지를 더 가볍고<br>선명하게, ${TOOL_BRAND}</h1>
+<h1 class="phero-h1">이미지를 더 가볍고<br>선명하게</h1>
 <p class="phero-p">압축·리사이즈·자르기부터 AI 배경 제거까지. 설치도 회원가입도 없이 브라우저에서 바로.</p>
 <div class="phero-cta"><a class="btn-red" href="/compress">무료로 시작하기</a><a class="btn-gray" href="#features">도구 둘러보기</a></div>
 </div>
