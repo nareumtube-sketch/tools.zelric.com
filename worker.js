@@ -576,13 +576,13 @@ ${renderToolsHeader()}
 <div class="phero-cta"><a class="btn-red" href="/compress">무료로 시작하기</a><a class="btn-gray" href="#features">도구 둘러보기</a></div>
 </div>
 <div class="phero-art" aria-hidden="true"><div class="fan">
-<div class="fan-card" style="background-image:linear-gradient(135deg,#a1c4fd,#c2e9fb)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#fbc2eb,#a6c1ee)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#84fab0,#8fd3f4)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#ff9a9e,#fecfef)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#fda085,#f6d365)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#d4fc79,#96e6a1)"></div>
-<div class="fan-card" style="background-image:linear-gradient(135deg,#ffecd2,#fcb69f)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric1/300/400'),linear-gradient(135deg,#a1c4fd,#c2e9fb)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric2/300/400'),linear-gradient(135deg,#fbc2eb,#a6c1ee)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric3/300/400'),linear-gradient(135deg,#84fab0,#8fd3f4)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric4/300/400'),linear-gradient(135deg,#ff9a9e,#fecfef)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric5/300/400'),linear-gradient(135deg,#fda085,#f6d365)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric6/300/400'),linear-gradient(135deg,#d4fc79,#96e6a1)"></div>
+<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric7/300/400'),linear-gradient(135deg,#ffecd2,#fcb69f)"></div>
 </div></div>
 </div>
 </section>
