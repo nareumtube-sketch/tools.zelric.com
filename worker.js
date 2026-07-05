@@ -417,6 +417,11 @@ const TOOLS_CSS = `
 .fan-card:nth-child(5){transform:translate(36px,8px) rotate(7deg) scale(.93);z-index:3}
 .fan-card:nth-child(6){transform:translate(70px,22px) rotate(14deg) scale(.85);z-index:2}
 .fan-card:nth-child(7){transform:translate(96px,40px) rotate(21deg) scale(.78);z-index:1}
+.ba-before{position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;filter:blur(3px) saturate(.5) contrast(.92);clip-path:inset(0 50% 0 0);z-index:1}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:rgba(255,255,255,.92);box-shadow:0 0 8px rgba(0,0,0,.35);z-index:2}
+.ba-line::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.ba-lab{position:absolute;bottom:8px;font-size:9px;font-weight:800;letter-spacing:.02em;color:#fff;background:rgba(0,0,0,.48);padding:2px 7px;border-radius:5px;z-index:2}
+.ba-lab.l{left:8px}.ba-lab.r{right:8px}
 @media (max-width:520px){.fan{transform:scale(.76)}}
 .band{background:var(--bg-surface);padding:56px 24px;text-align:center}
 .band-in{max-width:620px;margin:0 auto}
@@ -579,7 +584,7 @@ ${renderToolsHeader()}
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric1/300/400'),linear-gradient(135deg,#a1c4fd,#c2e9fb)"></div>
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric2/300/400'),linear-gradient(135deg,#fbc2eb,#a6c1ee)"></div>
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric3/300/400'),linear-gradient(135deg,#84fab0,#8fd3f4)"></div>
-<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric4/300/400'),linear-gradient(135deg,#ff9a9e,#fecfef)"></div>
+<div class="fan-card ba" style="background-image:url('https://picsum.photos/seed/zelric4/300/400'),linear-gradient(135deg,#ff9a9e,#fecfef)"><span class="ba-before"></span><span class="ba-line"></span><span class="ba-lab l">전</span><span class="ba-lab r">후</span></div>
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric5/300/400'),linear-gradient(135deg,#fda085,#f6d365)"></div>
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric6/300/400'),linear-gradient(135deg,#d4fc79,#96e6a1)"></div>
 <div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric7/300/400'),linear-gradient(135deg,#ffecd2,#fcb69f)"></div>
