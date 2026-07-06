@@ -424,10 +424,10 @@ const TOOLS_CSS = `
 .crop .ba-after{background-size:172%}
 .rembg .ba-after{background-image:conic-gradient(#dfe0e4 90deg,#fff 0 180deg,#dfe0e4 0 270deg,#fff 0);background-size:16px 16px}
 .ba-wm{position:absolute;right:9px;bottom:22px;z-index:2;font-size:10px;font-weight:800;color:rgba(255,255,255,.9);transform:rotate(-8deg);text-shadow:0 1px 3px rgba(0,0,0,.45)}
-.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:rgba(255,255,255,.92);box-shadow:0 0 8px rgba(0,0,0,.35);z-index:2}
-.ba-line::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.ba-lab{position:absolute;bottom:8px;font-size:9px;font-weight:800;letter-spacing:.02em;color:#fff;background:rgba(0,0,0,.48);padding:2px 7px;border-radius:5px;z-index:2}
-.ba-lab.l{left:8px}.ba-lab.r{right:8px}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:1px;margin-left:-.5px;background:rgba(140,140,150,.6);z-index:2}
+.ba-line::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:rgba(150,150,158,.85);border:1px solid rgba(255,255,255,.35);z-index:2}
+.ba-tool{position:absolute;top:7px;left:50%;transform:translateX(-50%);z-index:3;font-size:8.5px;font-weight:800;color:#fff;background:rgba(22,22,30,.62);padding:3px 8px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+.phero-art .fan-card{text-decoration:none;color:#fff;cursor:pointer}
 @media (max-width:520px){.fan{transform:scale(.76)}}
 .band{background:var(--bg-surface);padding:56px 24px;text-align:center}
 .band-in{max-width:620px;margin:0 auto}
@@ -586,14 +586,14 @@ ${renderToolsHeader()}
 <p class="phero-p">압축·리사이즈·자르기부터 AI 배경 제거까지. 설치도 회원가입도 없이 브라우저에서 바로.</p>
 <div class="phero-cta"><a class="btn-red" href="/compress">무료로 시작하기</a><a class="btn-gray" href="#features">도구 둘러보기</a></div>
 </div>
-<div class="phero-art" aria-hidden="true"><div class="fan">
-<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric1/300/400'),linear-gradient(135deg,#a1c4fd,#c2e9fb)"></div>
-<div class="fan-card ba rembg" style="background-image:url('https://picsum.photos/seed/zelric2/300/400'),linear-gradient(135deg,#fbc2eb,#a6c1ee)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-lab l">원본</span><span class="ba-lab r">배경 제거</span></div>
-<div class="fan-card ba up" style="background-image:url('https://picsum.photos/seed/zelric3/300/400'),linear-gradient(135deg,#84fab0,#8fd3f4)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-lab l">흐림</span><span class="ba-lab r">선명</span></div>
-<div class="fan-card ba wm" style="background-image:url('https://picsum.photos/seed/zelric4/300/400'),linear-gradient(135deg,#ff9a9e,#fecfef)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-wm">© Zelric</span><span class="ba-line"></span><span class="ba-lab l">원본</span><span class="ba-lab r">워터마크</span></div>
-<div class="fan-card ba up" style="background-image:url('https://picsum.photos/seed/zelric5/300/400'),linear-gradient(135deg,#fda085,#f6d365)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-lab l">흐림</span><span class="ba-lab r">선명</span></div>
-<div class="fan-card ba crop" style="background-image:url('https://picsum.photos/seed/zelric6/300/400'),linear-gradient(135deg,#d4fc79,#96e6a1)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-lab l">원본</span><span class="ba-lab r">자르기</span></div>
-<div class="fan-card" style="background-image:url('https://picsum.photos/seed/zelric7/300/400'),linear-gradient(135deg,#ffecd2,#fcb69f)"></div>
+<div class="phero-art"><div class="fan">
+<a class="fan-card" href="/compress" aria-label="이미지 압축" style="background-image:url('https://picsum.photos/seed/zelric1/300/400'),linear-gradient(135deg,#a1c4fd,#c2e9fb)"></a>
+<a class="fan-card ba rembg" href="/remove-bg" aria-label="배경 제거" style="background-image:url('https://picsum.photos/seed/zelric2/300/400'),linear-gradient(135deg,#fbc2eb,#a6c1ee)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-tool">배경 제거</span></a>
+<a class="fan-card ba up" href="/upscale" aria-label="업스케일" style="background-image:url('https://picsum.photos/seed/zelric3/300/400'),linear-gradient(135deg,#84fab0,#8fd3f4)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-tool">업스케일</span></a>
+<a class="fan-card ba wm" href="/watermark" aria-label="워터마크" style="background-image:url('https://picsum.photos/seed/zelric4/300/400'),linear-gradient(135deg,#ff9a9e,#fecfef)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-wm">© Zelric</span><span class="ba-line"></span><span class="ba-tool">워터마크</span></a>
+<a class="fan-card ba crop" href="/crop" aria-label="자르기" style="background-image:url('https://picsum.photos/seed/zelric5/300/400'),linear-gradient(135deg,#fda085,#f6d365)"><span class="ba-before"></span><span class="ba-after"></span><span class="ba-line"></span><span class="ba-tool">자르기</span></a>
+<a class="fan-card" href="/resize" aria-label="크기 조절" style="background-image:url('https://picsum.photos/seed/zelric6/300/400'),linear-gradient(135deg,#d4fc79,#96e6a1)"></a>
+<a class="fan-card" href="/convert" aria-label="포맷 변환" style="background-image:url('https://picsum.photos/seed/zelric7/300/400'),linear-gradient(135deg,#ffecd2,#fcb69f)"></a>
 </div></div>
 </div>
 </section>
